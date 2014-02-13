@@ -1,0 +1,99 @@
+C51 COMPILER V8.05a   CHENGXU                                                              01/18/2011 22:07:11 PAGE 1   
+
+
+C51 COMPILER V8.05a, COMPILATION OF MODULE CHENGXU
+OBJECT MODULE PLACED IN chengxu.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE chengxu.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          
+   2          ////////////////////////汇诚科技////////////////////
+   3          //////////////////http://www.ourhc.cn///////////////
+   4          ///////////////////步进电机调试程序/////////////////
+   5          
+   6          #include<reg52.h> 
+   7          #define uchar unsigned char
+   8          #define uint unsigned int
+   9          uchar Y=10; //初始化速度
+  10          /********************************************************
+  11                                                          控制位定义
+  12          ********************************************************/
+  13          
+  14          sbit shi_neng=P1^0;  // 使能控制位
+  15          sbit fang_shi=P1^1;  // 工作方式控制位
+  16          sbit fang_xiang=P1^2;// 旋转方向控制位
+  17          sbit mai_chong=P1^3; // 脉冲控制位
+  18          
+  19          sbit zheng_zhuan=P2^0;  //      正转
+  20          sbit fan_zhuan=P2^1;    //      反转
+  21          sbit jia_su=P2^2;        // 加速
+  22          sbit jian_su=P2^3;   // 减速
+  23          
+  24          /********************************************************
+  25                                                          延时函数
+  26          ********************************************************/
+  27          void delay(uchar i)//延时函数
+  28          {
+  29   1              uchar j,k;
+  30   1              for(j=0;j<i;j++)
+  31   1              for(k=0;k<180;k++);
+  32   1      }
+  33          /********************************************************
+  34                                                          加速函数
+  35          ********************************************************/
+  36          void jia()
+  37          {
+  38   1      
+  39   1      Y=Y-1;
+  40   1      if(Y<=1){Y=1;}//如果速度值小于等于1，值保持不变
+  41   1      
+  42   1      }
+  43          /********************************************************
+  44                                                          减速函数
+  45          ********************************************************/
+  46          void jian()
+  47          {
+  48   1      
+  49   1      Y=Y+1;
+  50   1      if(Y>=100){Y=100;}
+  51   1      
+  52   1      }
+  53          /********************************************************
+  54                                                          主函数
+  55          ********************************************************/
+C51 COMPILER V8.05a   CHENGXU                                                              01/18/2011 22:07:11 PAGE 2   
+
+  56          
+  57          main()
+  58          {
+  59   1              shi_neng=0;  // 使能控制位
+  60   1              fang_shi=1;  // 工作方式控制位
+  61   1              fang_xiang=1;// 旋转方向控制位
+  62   1              mai_chong=1; // 脉冲控制位
+  63   1              while(1)
+  64   1              {
+  65   2      
+  66   2                      if(zheng_zhuan==0){shi_neng=1;fang_xiang=1;}
+  67   2                      if(fan_zhuan==0){shi_neng=1;fang_xiang=0;}
+  68   2                      if(jia_su==0){delay(10);while(!jia_su);jia();}
+  69   2                      if(jian_su==0){delay(10);while(!jian_su);jian();}
+  70   2      
+  71   2                      mai_chong=~mai_chong; //输出时钟脉冲
+  72   2                      delay(Y);                         //延时(括号内数值越小，电机转动速度越快)      
+  73   2              }
+  74   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    102    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      1    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

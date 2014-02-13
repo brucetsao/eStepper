@@ -1,0 +1,14 @@
+<html>
+<body>
+<pre>
+<h1>礦ision3 Build Log</h1>
+<h2>Project:</h2>
+E:\汇诚科技\产品整理2010\汇诚科技资料整理\已开板\2010年开板产品\10k342_S52步进电机驱动控制器\此版配套相应程序\003、工作方式改变程序\chengxu.uv2
+Project File Date:  03/26/2009
+
+<h2>Output:</h2>
+Build target 'Target 1'
+linking...
+Program Size: data=12.0 xdata=0 code=91
+creating hex file from "chengxu1"...
+"chengxu1" - 0 Error(s), 0 Warning(s).

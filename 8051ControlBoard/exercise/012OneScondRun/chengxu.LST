@@ -1,0 +1,97 @@
+C51 COMPILER V8.05a   CHENGXU                                                              03/19/2011 17:51:03 PAGE 1   
+
+
+C51 COMPILER V8.05a, COMPILATION OF MODULE CHENGXU
+OBJECT MODULE PLACED IN chengxu.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE chengxu.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          
+   2          /********************************************************
+   3          
+   4          实现功能：电机正转1秒，再反转1秒，依次循环
+   5          使用芯片：AT89S52
+   6          晶振：11.0592MHZ
+   7          编译环境：Keil
+   8          作者：zhangxinchunleo
+   9          网站：www.ourhc.cn
+  10          淘宝店：汇诚科技 http://shop36330473.taobao.com
+  11          
+  12          【声明】此程序仅用于学习与参考，引用请注明版权和作者信息！     
+  13          ********************************************************/
+  14          #include<reg52.h> //库文件
+  15          #define uchar unsigned char     //字符型宏定义
+  16          #define uint unsigned int       //整型宏定义
+  17          
+  18          uint cnt=0;                      //设定转动脉冲数值
+  19          /********************************************************
+  20                                                          控制位定义
+  21          ********************************************************/
+  22          
+  23          sbit shi_neng=P1^0;  // 使能控制位
+  24          sbit fang_shi=P1^1;  // 工作方式控制位
+  25          sbit fang_xiang=P1^2;// 旋转方向控制位
+  26          sbit mai_chong=P1^3; // 脉冲控制位
+  27          
+  28          /********************************************************
+  29                                                          脉冲延时函数
+  30          ********************************************************/
+  31          void Mdelay(uint y)//延时函数
+  32          {
+  33   1              uchar j,k;
+  34   1              for(j=0;j<y;j++)
+  35   1              for(k=0;k<250;k++);
+  36   1      }
+  37          
+  38          /********************************************************
+  39                                                          主函数
+  40          ********************************************************/
+  41          
+  42          main()
+  43          {
+  44   1              shi_neng=0;  // 使能控制位
+  45   1              fang_shi=1;  // 工作方式控制 
+  46   1              fang_xiang=1;// 控制方向为正转
+  47   1              mai_chong=1; // 脉冲控制位
+  48   1              cnt=800;
+  49   1              while(1)
+  50   1              {
+  51   2                   shi_neng=1;
+  52   2                       fang_xiang=1;
+  53   2                       cnt=1000;
+  54   2                                      while(cnt--) 
+  55   2                                         {
+C51 COMPILER V8.05a   CHENGXU                                                              03/19/2011 17:51:03 PAGE 2   
+
+  56   3                                              mai_chong=~mai_chong; //输出时钟脉冲
+  57   3                                              Mdelay(3);
+  58   3                                              }
+  59   2                              
+  60   2                       shi_neng=1;
+  61   2                       fang_xiang=0;
+  62   2                       cnt=1000;
+  63   2                                      while(cnt--) 
+  64   2                                         {
+  65   3                                              mai_chong=~mai_chong; //输出时钟脉冲
+  66   3                                              Mdelay(3);
+  67   3                                              }
+  68   2                              } }
+  69          
+  70          /********************************************************
+  71                                                          结束
+  72          ********************************************************/
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     95    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      2    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
