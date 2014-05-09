@@ -4,7 +4,7 @@ eStepper
 The codes ared used for my book entitled as "The Stepper Motors Controller Practices by Arduino Technology" 
 科技發達今日，資訊科技技術日新月異，許多資訊相關科技的科技人，
 每天被十倍速的時代壓力，擠壓著生活品質，為了追逐最新的科技與技術，
-不惜焚膏繼晷日夜追趕，只怕追趕不上就被科技洪流所淘汰，
+不惜焚膏繼晷日夜追趕，只怕追趕不上就被科技洪流所淘汰，   
 造成許多年輕的科技菁英，年紀輕輕的卻都是一高、二高、甚至三高皆有，
 嚴重的甚至、中風、過勞死，對當今社會造成人才的重大損失。
 隨著環保綠色革命，我們思考著，是否在這知識經濟時代，
